@@ -40,7 +40,11 @@ These steps are not currently tested. They are my expected path.
 ### Notes
 
 https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint
+
 https://www.linux.com/learn/create-secure-linux-based-wireless-access-point
+
 https://wiki.debian.org/HowTo/dnsmasq
+
 https://www.howtoforge.com/nat_iptables
+
 http://rlworkman.net/howtos/iptables/iptables-tutorial.html#NATINTRO
