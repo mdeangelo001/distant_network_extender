@@ -37,7 +37,7 @@ These steps are not currently tested. They are my expected path.
 5. Start dnsmasq providing DHCP and DNS to br0.
 6. Set up ip tables to provide NAT forwarding to wlan1.
  
-### Notes
+## Notes
 
 https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint
 
@@ -48,3 +48,20 @@ https://wiki.debian.org/HowTo/dnsmasq
 https://www.howtoforge.com/nat_iptables
 
 http://rlworkman.net/howtos/iptables/iptables-tutorial.html#NATINTRO
+
+Starting up bridge got "can't add wlan0 to bridge br0"
+
+The fix is "sudo iw dev wlan0 set 4addr on"
+
+From http://serverfault.com/questions/152363/bridging-wlan0-to-eth0
+
+Using 172.xx.xx.0/24 for network
+
+## Initial Testing
+
+I had an old netbook laying around that was very underpowered. It is
+a Gateway with an Intel Atom Processor N450 and 1GB of RAM. It ran
+Windows XP. I put Linux Mint 17.1 with the Mate Desktop Environment
+and it ran well enough to do some initial tests while waiting for
+Pine64 components to arrive. I was able to add the setup info that
+worked for that.

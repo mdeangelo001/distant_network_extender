@@ -1,0 +1,5 @@
+# Change the 172.XX.XX.0/24 references to the one you will use
+# for your private network
+iptables -t nat -A POSTROUTING -s 172.XX.XX.0/24 -o wlan1 -j MASQUERADE
+iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -s 172.XX.XX.0/24 -o wlan1 -j ACCEPT

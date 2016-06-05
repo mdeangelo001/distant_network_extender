@@ -1,0 +1,7 @@
+# This file can specify different passwords for different
+# MAC addresses. The line starting with all zero MAC address
+# is the default.
+
+# The password is in plain text. Please make sure it is owned
+# by root and chmod 600 is used so no one can read it.
+00:00:00:00:00:00 My Network Password
