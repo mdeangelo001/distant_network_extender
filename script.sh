@@ -1,7 +1,7 @@
 #! /bin/bash
 
 service hostapd stop
-# TODO: stop dnsmasq
+service dnsmasq stop
 
 # TODO: remove wlan0 and eth0 from managed devices in Network Manager
 
@@ -16,7 +16,7 @@ brctl addif br0 wlan0
 ifconfig br0 172.23.13.1/24 up
 
 service hostapd start
-# TODO: start dnsmasq
+service dnsmasq start
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --table nat --append POSTROUTING --out-interface wlan1 -j MASQUERADE -s 172.23.13.0/24
 iptables --append FORWARD -s 172.23.13.0/24 -j ACCEPT
