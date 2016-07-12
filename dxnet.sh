@@ -41,7 +41,6 @@ cat << EOF > /etc/dnsmasq.conf
 interface=${LOCAL_BRIDGE_NET_DEVICE}
 domain-needed
 bogus-priv
-no-resolv
 no-poll
 server=8.8.8.8
 server=8.8.4.4
