@@ -38,7 +38,7 @@ EOF
 
 generate_dnsmasq_conf() {
 cat << EOF > /etc/dnsmasq.conf 
-interface=${LOCAL_BRIDGE_NET_DEVICE}
+except-interface=${REMOTE_WIFI_NET_DEVICE}
 domain-needed
 bogus-priv
 no-poll
@@ -110,7 +110,8 @@ include_devices_in_network_manager() {
 
 start() {
   exclude_devices_from_network_manager
-  service network-manager restart
+  initctl reload network-manager
+  sleep 1
   build_bridge
   setup_iptables
   generate_hostapd_conf
@@ -125,7 +126,7 @@ stop() {
   tear_down_iptables
   tear_down_bridge
   include_devices_in_network_manager
-  service network-manager restart
+  initctl reload network-manager
 }
 
 case "$1" in
