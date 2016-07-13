@@ -1,6 +1,6 @@
 #! /bin/bash
 
-LOCAL_WIFI_NET_DEVICE=wlan0
+LOCAL_WIFI_NET_DEVICE=wlan2
 LOCAL_WIRE_NET_DEVICE=eth0
 LOCAL_BRIDGE_NET_DEVICE=br0
 LOCAL_IP_ADDRESS=172.23.13.1/24 
@@ -90,7 +90,27 @@ tear_down_iptables() {
   iptables --delete FORWARD -d ${LOCAL_IP_NETWORK} -j ACCEPT -m conntrack --ctstate ESTABLISHED,RELATED -i ${REMOTE_WIFI_NET_DEVICE}
 }
 
+get_device_mac_addr() {
+  LOCAL_WIFI_NET_DEVICE_MAC=$(cat /sys/class/net/${LOCAL_WIFI_NET_DEVICE}/address)
+  LOCAL_WIRE_NET_DEVICE_MAC=$(cat /sys/class/net/${LOCAL_WIRE_NET_DEVICE}/address)
+}
+
+exclude_devices_from_network_manager() {
+  get_device_mac_addr
+  sed --in-place -e "/^unmanaged-devices=/s/$/;mac:${LOCAL_WIRE_NET_DEVICE_MAC}/" /etc/NetworkManager/NetworkManager.conf 
+  sed --in-place -e "/^unmanaged-devices=/s/$/;mac:${LOCAL_WIFI_NET_DEVICE_MAC}/" /etc/NetworkManager/NetworkManager.conf 
+  sed --in-place -e "/^unmanaged-devices=/s/= *;*/=/" /etc/NetworkManager/NetworkManager.conf 
+}
+
+include_devices_in_network_manager() {
+  get_device_mac_addr
+  sed --in-place -e /^unmanaged-devices=/s/mac:${LOCAL_WIRE_NET_DEVICE_MAC}\;\*// /etc/NetworkManager/NetworkManager.conf 
+  sed --in-place -e /^unmanaged-devices=/s/mac:${LOCAL_WIFI_NET_DEVICE_MAC}\;\*// /etc/NetworkManager/NetworkManager.conf 
+}
+
 start() {
+  exclude_devices_from_network_manager
+  service network-manager restart
   build_bridge
   setup_iptables
   generate_hostapd_conf
@@ -104,6 +124,8 @@ stop() {
   service dnsmasq stop
   tear_down_iptables
   tear_down_bridge
+  include_devices_in_network_manager
+  service network-manager restart
 }
 
 case "$1" in
