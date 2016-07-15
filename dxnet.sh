@@ -104,8 +104,8 @@ exclude_devices_from_network_manager() {
 
 include_devices_in_network_manager() {
   get_device_mac_addr
-  sed --in-place -e /^unmanaged-devices=/s/mac:${LOCAL_WIRE_NET_DEVICE_MAC}\;\*// /etc/NetworkManager/NetworkManager.conf 
-  sed --in-place -e /^unmanaged-devices=/s/mac:${LOCAL_WIFI_NET_DEVICE_MAC}\;\*// /etc/NetworkManager/NetworkManager.conf 
+  sed --in-place -e /^unmanaged-devices=/s/mac:${LOCAL_WIRE_NET_DEVICE_MAC}\;\*//g /etc/NetworkManager/NetworkManager.conf 
+  sed --in-place -e /^unmanaged-devices=/s/mac:${LOCAL_WIFI_NET_DEVICE_MAC}\;\*//g /etc/NetworkManager/NetworkManager.conf 
 }
 
 start() {
