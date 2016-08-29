@@ -15,7 +15,9 @@ These are the parts that I am using:
 3. USB wifi device with a standard jack for an external antenna. I used this one TP-LINK TL-WN722N Wireless N150 High Gain USB Adapter since it is known to work well with Linux - http://smile.amazon.com/TP-LINK-TL-WN722N-Wireless-Adapter-External/dp/B002SZEOLG - $14
 4. Directional High Gain Antenna - I purchased a Cantenna from http://www.ebay.com/usr/hughpep. They are easy to build, but by the time I got all the parts together it was easier just to buy one of these. $20
 5. I already had a microsd card, keyboard and mouse, power supply, etc.
- 
+
+Update: I changed the antenna I am using... I got one of these - https://smile.amazon.com/gp/product/B008Z4I7WQ/ - and mounted it to an old camera tripod. I used these connectors to reduce the loss in the pigtail, and a USB extension to connect to my computer.
+
 ## Steps
 
 These steps are not currently tested. They are my expected path.
